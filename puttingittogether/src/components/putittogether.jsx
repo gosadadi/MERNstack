@@ -5,15 +5,8 @@ class PutItTogether extends Component{
         super(props);
     }
     render(){
-        return(
-            <div>
-            <h1> {this.props.firstName} {this.props.lastName}</h1>
-            <p><List {...this.props.age + this.state.count}/></p>
-            <p>{this.props.hairColor}</p>
-            <button onClick={this.props.handler}>Birthday Button for {this.props.firstName} {this.props.lastName}</button>
-            </div>
-            
-        )
-    }
+        return<>
+    <PersonCard firstName="John" lastName="Smith" age={ 8 } hairColor="Brown" /> 
+    </>}
 }
 export default PutItTogether;

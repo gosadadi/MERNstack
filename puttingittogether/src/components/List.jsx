@@ -1,24 +1,28 @@
 import React,{Component} from "react";
-
+import PutItTogether from "./putittogether"
 class List  extends Component{
     constructor(props){
         super(props);
+        //========= state persist data=======
         this.state={
-            count:0
+            age:this.props.age
         }
     }
-    countHandler=()=>{
+
+    ageIncrement=()=>{
         this.setState({
-            count:this.state.count+1
+            age:this.state.age + 1
         })
     }
 
     render(){
         return(
-            <>
-            {this.state.count}
-            handler={this.countHandler}
-            </>
+            <div>
+            <h1>{this.props.firstName} {this.props.lastName}</h1>
+            <p>{this.state.age}</p>
+            <p>{this.props.hairColor}</p>
+            <button onClick={()=>{this.setState({age:this.state.age + 1});}}>Birthday Button {this.props.firstName} {this.props.lastName}</button>
+            </div>
 
         )
     }
