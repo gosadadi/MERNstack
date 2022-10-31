@@ -1,10 +1,10 @@
 import React from 'react';
-import PokemonAPI from './components/PokemonAPI'
+import AxiosPokemonAPI from './components/AxiosPokemonAPI';
 import './App.css';
 function App() {
   return (
     <div className="App">
-      < PokemonAPI/>
+      < AxiosPokemonAPI/>
     </div>
   );
 }
