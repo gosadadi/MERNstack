@@ -14,6 +14,7 @@
     "faker": "^6.6.6"
   },
   "devDependencies": {
+    "type": "module",
     "@faker-js/faker": "^7.6.0"
   }
 }
