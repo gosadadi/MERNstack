@@ -2,7 +2,9 @@
 const Joke = require('../models/joke.models');
 // controller responsible for making queries to the DB using the model
 // all the CRUD
-// 1.get all
+
+//============get all===========
+
 module.exports.findAllJokes = (req, res) => {
     // use model to execute queries
     Joke.find()
@@ -44,3 +46,6 @@ module.exports.deleteAnExistingJoke = (req, res) => {
         .then(result => res.json({ result: result }))
         .catch(err => res.json({ message: 'Something went wrong', error: err }));
 }
+
+// =========get one random========
+
