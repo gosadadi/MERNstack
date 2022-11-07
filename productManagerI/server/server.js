@@ -13,7 +13,7 @@ app.use(express.json(), express.urlencoded({ extended: true }));
 
 // =======require config========
 require("./config/mongoose.config")(db)
-//====== require controllers======
+//====== require routes======
 require("./routes/product.routes")(app)
 
 

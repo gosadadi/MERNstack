@@ -3,10 +3,10 @@ const Product = require('../models/product.model');
 // controller responsible for making queries to the DB using the model
 // all the CRUD
 
-//============get all===========
+// 1.============get all===========
 
 module.exports.findAllProducts = (req, res) => {
-    // use model to execute queries
+    // =====use model to execute queries======
     Product.find()
         .then(allProducts => res.json( allProducts ))
         .catch(err => res.json({ message: 'Something went wrong', error: err }));
@@ -19,7 +19,7 @@ module.exports.findOneSingleProduct= (req, res) => {
         .catch(err => res.json({ message: 'Something went wrong', error: err }));
 }
 
-//======Create Products======= 
+// 3.======Create Products======= 
 
 module.exports.createNewProduct = (req, res) => {
     // db.jokes.insertOne({setup:"afjkekfkjafjk",punchline:"sffkasklfm"})
@@ -28,7 +28,7 @@ module.exports.createNewProduct = (req, res) => {
         .catch(err => res.json({ message: 'Something went wrong', error: err }));
 }
 
-// ======update one=======
+// 4. ======update one=======
 
 module.exports.updateExistingProduct= (req, res) => {
     Product.findOneAndUpdate(
@@ -39,7 +39,7 @@ module.exports.updateExistingProduct= (req, res) => {
         .then(updatedProduct => res.json({ product: updatedProduct}))
         .catch(err => res.json({ message: 'Something went wrong', error: err }));
 }
-//======delete one by ID========
+// 6.======delete one by ID========
 
 module.exports.deleteAnExistingProduct = (req, res) => {
     Product.deleteOne({ _id: req.params._id })

@@ -1,35 +1,21 @@
-import axios from 'axios';
-import {useState,useEffect} from 'react';
 import './App.css';
 import ProductForm from './components/ProductForm';
+import ShowAll from './components/ShowAll';
+import ShowOne from './components/ShowOne';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
-  const[products,setProducts]=useState([])
-  useEffect(()=>{
-    axios.get("http://localhost:8000/api/products")
-    .then(response=>{
-      console.log(response.data);
-      return(setProducts(response.data));
-    })
-    .catch(err=>console.log("error",err))
-  },[])
+
   return (
     <div className="App">
-      <ProductForm/>
+      <ProductForm />
+      <hr />
       <h1>All Products</h1>
-      <div>
-        {
-        products.map((product)=>{
-          return(<div key={product._id}>
-            <p>title:{product.title}</p>
-            <p>price:{product.price}</p>
-            <p>description:{product.description}</p>
-          </div>);
-            
-          })
-        }
-      </div>
-      
+      <ShowAll />
+      <Routes>
+        {/* <Route element={<Main />} path="/people/" /> */}
+        <Route element={<ShowOne />} path="/products/:id" />
+        </Routes>
     </div>
   );
 }
