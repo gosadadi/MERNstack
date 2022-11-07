@@ -26,7 +26,23 @@ module.exports.getAllPeople = (request, response) => {
 // =======get one=========
 
 module.exports.getPerson = (request, response) => {
-    Person.findOne({_id:request.params.id})
+    Person.findOne({ _id: request.params.id })
         .then(person => response.json(person))
         .catch(err => response.json(err))
+
 }
+// =======update=========
+module.exports.updatePerson = (request, response) => {
+    Person.findOneAndUpdate({ _id: request.params.id }, request.body, { new: true })
+        .then(updatedPerson => response.json(updatedPerson))
+        .catch(err => response.json(err))
+}
+// =======delete method=======
+module.exports.deletePerson = (request, response) => {
+    Person.deleteOne({ _id: request.params.id })
+        .then(deleteConfirmation => response.json(deleteConfirmation))
+        .catch(err => response.json(err))
+}
+
+
+

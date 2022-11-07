@@ -10,5 +10,9 @@ module.exports = function(app){
     app.get('/api/people', PersonController.getAllPeople);
     // =======route to get one=========
     app.get('/api/people/:id', PersonController.getPerson);
+    // ========update======
+    app.put('/api/people/:id', PersonController.updatePerson);
+    // ======delete=====
+    app.delete('/api/people/:id', PersonController.deletePerson);
 }
 
