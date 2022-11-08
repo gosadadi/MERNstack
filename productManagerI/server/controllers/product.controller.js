@@ -37,7 +37,7 @@ module.exports.updateExistingProduct= (req, res) => {
         { new: true, runValidators: true }
     )
         .then(updatedProduct => res.json({ product: updatedProduct}))
-        .catch(err => res.json({ message: 'Something went wrong', error: err }));
+        .catch(err => res.json({ message: 'Something went wrong findOneAndUpdate', error: err }));
 }
 // 6.======delete one by ID========
 

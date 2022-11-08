@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const ProductSchema = new mongoose.Schema({
     title: {
         type:String,
-        required:[true,"title required"],
+        required:[true,"title is required"],
         minLength:[2,"title must be at least 2"]
 
     },

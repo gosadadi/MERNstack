@@ -2,20 +2,24 @@ import './App.css';
 import ProductForm from './components/ProductForm';
 import ShowAll from './components/ShowAll';
 import ShowOne from './components/ShowOne';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route,Link,Navigate } from 'react-router-dom';
+import Update from './components/Update';
 
 function App() {
 
   return (
     <div className="App">
-      <ProductForm />
+      <Link to={"/products"}>All Products</Link>
+      <Link to={"/"} style={{"margin":"100px"}}>Create Product </Link>
       <hr />
-      <h1>All Products</h1>
-      <ShowAll />
       <Routes>
         {/* <Route element={<Main />} path="/people/" /> */}
         <Route element={<ShowOne />} path="/products/:id" />
-        </Routes>
+        <Route element={<ProductForm /> } path="/"/>
+        <Route element={ <ShowAll />} path="/products"/>
+        <Route element={<Update/>} path="/products/:id/edit"/>
+        <Route path="*" element={<Navigate to={"/"} replace/>}/>
+      </Routes>
     </div>
   );
 }
