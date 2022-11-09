@@ -25,7 +25,7 @@ module.exports.createNewProduct = (req, res) => {
     // db.jokes.insertOne({setup:"afjkekfkjafjk",punchline:"sffkasklfm"})
     Product.create(req.body)
         .then(newlyCreatedProduct => res.json({ product: newlyCreatedProduct }))
-        .catch(err => res.json({ message: 'Something went wrong', error: err }));
+        .catch(err => res.status(400).json({ message: 'Something went wrong', error: err }));
 }
 
 // 4. ======update one=======
@@ -37,7 +37,7 @@ module.exports.updateExistingProduct= (req, res) => {
         { new: true, runValidators: true }
     )
         .then(updatedProduct => res.json({ product: updatedProduct}))
-        .catch(err => res.json({ message: 'Something went wrong findOneAndUpdate', error: err }));
+        .catch(err => res.status(400).json({ message: 'Something went wrong', error: err }));
 }
 // 6.======delete one by ID========
 

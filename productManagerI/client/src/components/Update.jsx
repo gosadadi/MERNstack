@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useParams,Navigate, useNavigate } from "react-router-dom";
-    
+import { useParams, useNavigate } from "react-router-dom";
+
 const Update = (props) => {
     const { id } = useParams();
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState('');
-    const navigate=useNavigate();
-    
+    const [errors, setErrors] = useState([]);
+    const navigate = useNavigate();
+
     useEffect(() => {
         axios.get(`http://localhost:8000/api/products/${id}`)
             .then(res => {
@@ -16,10 +17,10 @@ const Update = (props) => {
                 setTitle(res.data.product.title);
                 setPrice(res.data.product.price);
                 setDescription(res.data.product.description);
-                
+
             });
     }, []);
-    
+
     const updateProduct = e => {
         e.preventDefault();
         axios.put(`http://localhost:8000/api/products/update/${id}`, {
@@ -27,41 +28,51 @@ const Update = (props) => {
             price,
             description
         })
-            .then(res => {console.log(res)
-            navigate("/products")})
-            .catch(err => console.error(err));
+            .then(res => {
+                console.log(res)
+                navigate("/products")
+            })
+            .catch(err => {
+                const errorResponse = err.response.data.error.errors; // Get the errors from err.response.data
+                const errorArr = []; // Define a temp error array to push the messages in
+                for (const key of Object.keys(errorResponse)) { // Loop through all errors and get the messages
+                    errorArr.push(errorResponse[key].message)
+                }
+                // Set Errors
+                setErrors(errorArr);
+            })
+        }
+        return (
+            <div>
+                <h1>Update a Product</h1>
+                <form onSubmit={updateProduct}>
+                    {errors.map((err, index) => <p key={index} style={{color:"red"}}>{err}</p>)}
+                    <p>
+                        <label>Title</label><br />
+                        <input type="text"
+                            name="title"
+                            value={title}
+                            onChange={(e) => { setTitle(e.target.value) }} />
+                    </p>
+                    <p>
+                        <label>Price</label><br />
+                        <input type="number"
+                            name="price"
+                            value={price}
+                            onChange={(e) => { setPrice(e.target.value) }} />
+                    </p>
+                    <p>
+                        <label>Description</label><br />
+                        <input type="text"
+                            name="description"
+                            value={description}
+                            onChange={(e) => { setDescription(e.target.value) }} />
+                    </p>
+                    <input type="submit" />
+                </form>
+            </div>
+        )
     }
-    
-    return (
-        <div>
-            <h1>Update a Product</h1>
-            <form onSubmit={updateProduct}>
-                <p>
-                    <label>Title</label><br />
-                    <input type="text" 
-                    name="title" 
-                    value={title} 
-                    onChange={(e) => { setTitle(e.target.value) }} />
-                </p>
-                <p>
-                    <label>Price</label><br />
-                    <input type="number" 
-                    name="price"
-                    value={price} 
-                    onChange={(e) => { setPrice(e.target.value) }} />
-                </p>
-                <p>
-                    <label>Description</label><br />
-                    <input type="text" 
-                    name="description"
-                    value={description} 
-                    onChange={(e) => { setDescription(e.target.value) }} />
-                </p>
-                <input type="submit" />
-            </form>
-        </div>
-    )
-}
-    
-export default Update;
+
+    export default Update;
 
