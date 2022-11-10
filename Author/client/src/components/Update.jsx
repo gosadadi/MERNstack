@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link,useNavigate} from "react-router-dom";
 
 const Update = (props) => {
     const { id } = useParams();
     const [name, setName] = useState('');
+    const navigate=useNavigate();
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
@@ -34,6 +35,9 @@ const Update = (props) => {
                 setErrors(errorArr);
             })
         }
+        const cancelHandler = () => {
+            return navigate("/");
+        }
         return (
             <div>
                 <h5>Edit this Author</h5>
@@ -47,6 +51,7 @@ const Update = (props) => {
                             value={name}
                             onChange={(e) => { setName(e.target.value) }} />
                     </p>
+                    <button onClick={cancelHandler}>Cancel</button>
                     <input type="submit" />
                 </form>
             </div>
