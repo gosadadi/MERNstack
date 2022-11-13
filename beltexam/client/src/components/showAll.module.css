@@ -1,0 +1,14 @@
+.author{
+    width: 50%;
+    text-align: left;
+    margin-left: 20px;
+    padding: 10px;
+    margin: auto;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 20x;
+    margin: 10px;
+    width: 50%;
+}
