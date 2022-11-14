@@ -1,48 +1,47 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link,useNavigate,useParams } from 'react-router-dom';
-import authorStyle from './showAll.module.css'
+import pirateStyle from './showAll.module.css'
 
 const ShowAll = (props) => {
-    const [authors, setAuthors] = useState([]);
+    const [pirates, setPirates] = useState([]);
     const[loaded,setLoaded]=useState(false);
-    const { id } = useParams();
+    const {id} = useParams();
     const navigate=useNavigate();
 
     useEffect(() => {
-        axios.get("http://localhost:8000/api/authors")
-            .then(response => {(setAuthors(response.data));
+        axios.get("http://localhost:8000/api/pirates")
+            .then(response => {(setPirates(response.data));
                 setLoaded(true)
             console.log(response.data);})
             .catch(err => console.log("error", err))
     }, [])
-    const deleteAuthor=(id)=>{
+    const deletePirate=(id)=>{
         console.log(id);
-        axios.delete("http://localhost:8000/api/authors/delete/"+id)
+        axios.delete("http://localhost:8000/api/pirates/delete/"+id)
             .then(response=>{
                 console.log(response.data);
-                setAuthors(authors.filter((author,i)=>author._id !==id));
+                setPirates(pirates.filter((pirate,i)=>pirate._id !==id));
             })
             .catch(err=>console.log(err))
     }
     return (
-        <div className={authorStyle.author}>
-            <Link to={"/new"}>Add an author</Link>
-            <p>we have quotes by: </p>
+        <div className={pirateStyle.pirate}>
+            <h1>Pirate Crew</h1>
+            <Link to={"/pirate/new"}>Add a pirate</Link>
             <table>
-                <thead>
-                    <tr>
-                        <th>Author</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
                 <tbody>
-                    {loaded && authors.map((author)=>{return(<tr key={author._id}>
-                        <td><Link to={`/authors/${author._id}`}>{author.name}</Link></td>
-                        <td>
-                            <button onClick={()=>navigate(`/edit/${author._id}`)}>Edit</button>
-                            <button onClick={()=>deleteAuthor(author._id)}>Delete</button>
+                    {loaded && pirates.map((pirate)=>{return(<tr key={pirate._id}>
+                        <td className='pirateStyle.pirateAlign'>
+                            <p>{pirate.name} </p>
+                            <img src={pirate.image} alt="pirate image" width="400px" />
                         </td>
+                        <td><Link to={`/pirate/${pirate._id}`}><button style={{width:"100px",backgroundColor:"blue",color:"white",height:"40px"}}>View Pirate</button></Link></td>
+                        <td><button onClick={()=>deletePirate(pirate._id)} style={{width:"100px",backgroundColor:"red",color:"white",height:"40px"}}>Delete</button></td>
+                        {/* <td>
+                            <button onClick={()=>navigate(`/edit/${pirate._id}`)} style={{ color: "blue" }}>Edit</button>
+                            <button  style={{ color: "red" }}>Delete</button>
+                        </td> */}
                     </tr>);})}
                 </tbody>
             </table>

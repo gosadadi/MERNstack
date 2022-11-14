@@ -1,14 +1,22 @@
-.author{
-    width: 50%;
+.pirate{
+    width: 60%;
     text-align: left;
     margin-left: 20px;
     padding: 10px;
     margin: auto;
 }
 table, th, td {
-    border: 1px solid black;
+
     border-collapse: collapse;
     padding: 20x;
     margin: 10px;
-    width: 50%;
+    width: 100%;
+}
+.pirateAlign{
+    vertical-align: top;
+}
+.inlineBlock{
+    display:inline-block;
+    vertical-align: top;
+    padding: 10px;
 }

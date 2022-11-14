@@ -1,6 +1,6 @@
-// ======connect to db using mongoose====
+// ======import mongoose====
 const mongoose = require('mongoose');
-
+// ======connect to db and export=====
 module.exports=(db)=>{
 mongoose.connect(`mongodb://localhost/${db}`, {
     useNewUrlParser: true,
