@@ -34,7 +34,7 @@ const ShowOne = (props) => {
                     <nav>{pirates.name}</nav>
                     <h4><Link to={"/pirates"}>Pirate Crew</Link></h4>
                     <div class={pirateStyle.inlineBlock}>
-                        <p><img src={pirates.image} alt="pirate image" width="400px"/></p>
+                        <p><img src={pirates.image} alt="pirate image"/></p>
                         <p>{pirates.catchPhrase}</p>
                     </div>
                     <div class={pirateStyle.inlineBlock}>

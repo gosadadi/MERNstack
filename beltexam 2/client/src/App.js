@@ -1,4 +1,4 @@
-import { Routes, Route,Navigate} from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import './App.css';
 import CreateForm from './components/CreateForm';
 import ShowAll from './components/ShowAll';
@@ -10,10 +10,10 @@ function App() {
     <div className="App">
       <Routes>
         <Route element={ <ShowAll/>} path="/pirates"/>
-        <Route element={<CreateForm/> } path="/pirate/new"  />
+        <Route element={<CreateForm/> } path="/pirate/new"/>
         <Route element={<Update />} path="/edit/:id" />
         <Route element={<ShowOne/>} path="/pirate/:id"/>
-        <Route path="*" element={<Navigate to={"/pirates"} replace/>}/>
+        {/* <Route path="*" element={<Navigate to={"/"} replace/>}/> */}
       </Routes>
     </div>
   );
